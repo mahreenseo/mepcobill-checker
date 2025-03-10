@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEPCO Bill Checker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2C3E50, #4CA1AF);
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background: #2C3E50;
+            padding: 15px;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
+            text-align: center;
+            margin: 50px auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h2 {
+            color: #4CA1AF;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #4CA1AF;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        input:focus {
+            border-color: #2C3E50;
+            outline: none;
+        }
+        button {
+            background: #4CA1AF;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #2C3E50;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .footer {
+            background: #2C3E50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        MEPCO Bill Checker
+    </div>
+
+    <div class="container">
+        <h2>Check Your MEPCO Bill</h2>
+        <p>Enter your 14-digit reference number:</p>
+        <input type="text" id="refNumber" placeholder="Enter Reference Number" maxlength="14">
+        <button onclick="checkBill()">Check Bill</button>
+        <div id="result"></div>
+    </div>
+
+    <div class="footer">
+        &copy; 2025 MEPCO Bill Checker | All Rights Reserved
+    </div>
+
+    <script>
+        function checkBill() {
+            let refNumber = document.getElementById('refNumber').value;
+            if (refNumber.length !== 14 || isNaN(refNumber)) {
+                document.getElementById('result').innerHTML = "<span style='color:red;'>Please enter a valid 14-digit reference number.</span>";
+                return;
+            }
+            
+            let billUrl = `https://bill.pitc.com.pk/mepcobill?ref=${refNumber}`;
+            document.getElementById('result').innerHTML = `<a href="${billUrl}" target="_blank" style="color:#4CA1AF; font-weight:bold; text-decoration:none;">Click here to view your bill</a>`;
+        }
+    </script>
+</body>
+</html>
